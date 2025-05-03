@@ -1,0 +1,58 @@
+/* 全体のスタイル */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* ヘッダー */
+header {
+    margin-bottom: 20px;
+}
+
+/* カード */
+.card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+/* 統計表示 */
+.stats-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.stat-item {
+    flex: 0 0 48%;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0d6efd;
+}
+
+/* テーブル */
+.table-responsive {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.workday-highlight {
+    background-color: rgba(13, 110, 253, 0.1) !important;
+}
+
+/* チャート */
+canvas {
+    max-height: 300px;
+}
