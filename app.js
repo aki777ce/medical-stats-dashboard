@@ -600,15 +600,6 @@ document.addEventListener('DOMContentLoaded', function() {
         updateDepartmentChart();
         
         // 理由別チャート
-        updateReasonChart();
-        
-        // 統合された月別チャート
-        updateCombinedMonthlyChart();
-        
-        // テーブル更新
-        updateTable();
-        
-        console.log('チャート更新完了');
     }
     
     // 月別平日日動帯ストップ時間チャート
@@ -1014,75 +1005,9 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('統合月別チャート更新完了', { モード: chartDisplayMode });
     }
     
-    // テーブルの更新
-    function updateTable() {
-        const tbody = document.getElementById('data-tbody');
-        const workdayOnlyToggle = document.getElementById('workday-only-toggle').checked;
-        
-        // テーブルをクリア
-        tbody.innerHTML = '';
-        
-        // データをフィルター
-        let tableData = [...filteredData];
-        if (workdayOnlyToggle) {
-            tableData = tableData.filter(item => item.workdayHours > 0);
-        }
-        
-        // テーブルにデータを追加
-        tableData.forEach(item => {
-            const row = document.createElement('tr');
-            
-            // 平日日勤帯の行をハイライト
-            if (item.workdayHours > 0) {
-                row.classList.add('workday-highlight');
-            }
-            
-            row.innerHTML = `
-                <td>${item.date}</td>
-                <td>${item.department}</td>
-                <td>${item.timeRange}</td>
-                <td>${item.reason}</td>
-                <td>${item.workdayHours > 0 ? item.workdayHours.toFixed(1) + '時間' : '-'}</td>
-            `;
-            
-            tbody.appendChild(row);
-        });
-    }
-    
-    // CSVエクスポート
-    document.getElementById('export-csv').addEventListener('click', function() {
-        const workdayOnlyToggle = document.getElementById('workday-only-toggle').checked;
-        let exportData = [...filteredData];
-        
-        if (workdayOnlyToggle) {
-            exportData = exportData.filter(item => item.workdayHours > 0);
-        }
-        
-        if (exportData.length === 0) {
-            alert('エクスポートするデータがありません');
-            return;
-        }
-        
-        // CSVヘッダー
-        let csv = '日付,ストップ科,停止時間,理由,平日日勤帯時間\n';
-        
-        // データ行
-        exportData.forEach(item => {
-            const workdayHours = item.workdayHours > 0 ? item.workdayHours.toFixed(1) : '';
-            csv += `${item.date},${item.department},${item.timeRange},${item.reason},${workdayHours}\n`;
-        });
-        
-        // CSVファイルをダウンロード
-        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.setAttribute('href', url);
-        link.setAttribute('download', '医療統計データ.csv');
-        link.style.visibility = 'hidden';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    });
+    // 外部モジュールのイベントハンドラーを設定
+    window.EventHandlers.setupWorkdayToggleHandler(filteredData);
+    window.EventHandlers.setupExportHandler(filteredData);
     
 
 });
