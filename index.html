@@ -26,7 +26,10 @@
                                 <label for="file-upload" class="form-label">Excelファイルを選択</label>
                                 <input type="file" class="form-control" id="file-upload" accept=".xlsx, .xls">
                             </div>
-                            <button type="submit" class="btn btn-primary">アップロード</button>
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-primary">アップロード</button>
+                                <button type="button" id="clear-data" class="btn btn-secondary">クリア</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -179,6 +182,11 @@
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/locale/ja.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/japanese-holidays@1.0.10/lib/japanese-holidays.min.js"></script>
-    <script src="app.js"></script>
+    <!-- モジュール化したJSファイル -->
+    <script src="js/dataProcessor.js"></script>
+    <script src="js/chartRenderer.js"></script>
+    <script src="js/tableManager.js"></script>
+    <script src="js/eventHandlers.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
